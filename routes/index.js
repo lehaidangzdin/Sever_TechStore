@@ -686,7 +686,7 @@ router.post("/register", function (req, res, next) {
     }
 
 })
-router.post("/SPMoiNhat", function (req, res, next) {
+router.get("/SPMoiNhat", function (req, res, next) {
     let sql = "SELECT * FROM SanPham ORDER BY ngayNhap DESC LIMIT 20";
     con.query(sql, function (err, rows) {
         if (err) {
