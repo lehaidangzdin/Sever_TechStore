@@ -382,7 +382,7 @@ router.get("/Order", function (req, res, next) {
     });
 })
 
-//========================API MOBILE
+//========================API MOBILE============================
 router.post("/deleteGioHang", function (req, res, next) {
     let maKH = req.body.maKH;
     if (maKH) {
@@ -390,14 +390,15 @@ router.post("/deleteGioHang", function (req, res, next) {
         con.query(sql, function (err) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
-                return res.json({
-                    status: "susccess",
-                })
+                // return res.json({
+                //     status: "susccess",
+                // })
+                return res.send("susccess");
             }
         })
     }
@@ -410,32 +411,31 @@ router.post("/deleteSanPhamGH", function (req, res, next) {
         con.query(sql, function (err) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
-                return res.json({
-                    status: "susccess",
-                })
+                return res.send("susccess")
             }
         })
     }
 })
-router.post("/getAllSanPham", function (req, res, next) {
+router.get("/getAllSanPham", function (req, res, next) {
     let sql = "SELECT* FROM SanPham";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            // return res.json({
+            //     status: "susccess",
+            //     data: rows
+            // })
+            return res.send(rows);
         }
     })
 
@@ -447,15 +447,12 @@ router.post("/getChiTietHoaDon", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -467,15 +464,12 @@ router.post("/getGioHang", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -486,15 +480,12 @@ router.post("/getHoaDon", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -505,15 +496,12 @@ router.post("/getKhachHang", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -525,15 +513,12 @@ router.post("/getSanPhamDaMua", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -544,15 +529,12 @@ router.post("/getSpTheoMaSP", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -563,15 +545,12 @@ router.post("/getSpTheoTL", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows)
         }
     })
 
@@ -588,14 +567,12 @@ router.post("/InsertChiTietHoaDon", function (req, res, next) {
     con.query(sql, function (err) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-            })
+            return res.send("susccess")
         }
     })
 
@@ -609,14 +586,12 @@ router.post("/InsertGioHang", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-            })
+            return res.send("susccess")
         }
     })
 
@@ -630,14 +605,12 @@ router.post("/InsertHoaDon", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-            })
+            return res.send("susccess")
         }
     })
 
@@ -650,7 +623,7 @@ router.post("/login", function (req, res, next) {
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
@@ -658,14 +631,12 @@ router.post("/login", function (req, res, next) {
                 if (rows != null) {
                     if (matKhau == row[0].matKhau) {
                         if (rows[0].isDelete == 1) {
-                            return res.json({
+                            return res.send({
                                 status: "failure",
                                 message: "Tài khoản của bạn đã bị khóa!"
                             })
                         } else {
-                            return res.json({
-                                status: "success",
-                            })
+                            return res.send("susccess")
                         }
                     }
                 }
@@ -686,29 +657,27 @@ router.post("/register", function (req, res, next) {
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
                 if (rows != null) {
-                    return res.json({
+                    return res.send({
                         status: "failure",
                         message: "Tên đăng nhập đã tồn tại!"
                     })
                 } else {
                     let sql1 = "insert into KhachHang values(null,'" + tenDangNhap + "', '" + matKhau + "','" + tenKH + "','" + namSinh + "','" + soDienThoai + "','" + diaChi + "')";
-                    con.query(slq1, function (err) {
+                    con.query(sql1, function (err) {
                         if (err) {
                             console.log(err.message);
-                            return res.json({
+                            return res.send({
                                 status: "failure",
                                 message: err.message
                             })
                         } else {
-                            return res.json({
-                                status: "success",
-                            })
+                            return res.send("susccess")
                         }
                     })
                 }
@@ -722,15 +691,12 @@ router.post("/SPMoiNhat", function (req, res, next) {
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
-            return res.json({
+            return res.send({
                 status: "failure",
                 message: err.message
             })
         } else {
-            return res.json({
-                status: "susccess",
-                data: rows
-            })
+            return res.send(rows);
         }
     })
 
@@ -746,14 +712,12 @@ router.post("/updateKhachHang", function (req, res, next) {
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
-                return res.json({
-                    status: "susccess",
-                })
+                return res.send("susccess");
             }
         })
     }
@@ -767,14 +731,12 @@ router.post("/updateMatKhau", function (req, res, next) {
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
-                return res.json({
-                    status: "susccess",
-                })
+                return res.send("susccess");
             }
         })
     }
@@ -788,14 +750,12 @@ router.post("/UpdateSanPham", function (req, res, next) {
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
-                return res.json({
+                return res.send({
                     status: "failure",
                     message: err.message
                 })
             } else {
-                return res.json({
-                    status: "susccess",
-                })
+                return res.send("susccess");
             }
         })
     }
