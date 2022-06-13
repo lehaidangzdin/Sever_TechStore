@@ -422,7 +422,7 @@ router.post("/deleteSanPhamGH", function (req, res, next) {
         })
     }
 })
-router.post("/getAllSanPham", function (req, res, next) {
+router.get("/getAllSanPham", function (req, res, next) {
     let sql = "SELECT* FROM SanPham";
     con.query(sql, function (err, rows) {
         if (err) {
