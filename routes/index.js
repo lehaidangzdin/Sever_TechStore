@@ -431,10 +431,6 @@ router.get("/getAllSanPham", function (req, res, next) {
                 message: err.message
             })
         } else {
-            // return res.json({
-            //     status: "susccess",
-            //     data: rows
-            // })
             return res.send(rows);
         }
     })
