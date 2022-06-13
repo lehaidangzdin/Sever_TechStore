@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="icon"
+          href="https://img.icons8.com/external-wanicon-flat-wanicon/64/000000/external-smartband-medical-technology-wanicon-flat-wanicon.png"
+          type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #edf1f5;
+            margin-top: 20px;
+        }
+
+        .card {
+            margin-bottom: 30px;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid transparent;
+            border-radius: 0;
+        }
+
+        .card .card-subtitle {
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #8898aa;
+        }
+
+        .table-product.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f3f8fa !important
+        }
+
+        .table-product td {
+            border-top: 0px solid #dee2e6 !important;
+            color: #728299 !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--NAVBAR-->
+    <%- include FolderInclude/navBar.ejs %>
+    <!--NAVBAR-->
+    <!--SECSION HEADER-->
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h2 class="jumbotron-heading">CHI TIẾT SẢN PHẨM</h2>
+        </div>
+    </section>
+    <!--SECSION HEADER-->
+
+    <!--CONTENT-->
+    <main role="main">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+
+                        <%
+                        var cash = detailProduct[0].giaTien.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+                        var cashOld = detailProduct[0].giaCu.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }); %>
+                        <div class="col-lg-5 col-md-5 col-sm-6">
+                            <div class="white-box text-center"><img
+                                        src="<%= detailProduct[0].hinhAnh %>" style="width: 430px;height: 600px"
+                                        class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-6">
+                            <h4 class="box-title mt-5"><%= detailProduct[0].tenSP %>
+                                %>
+                            </h4>
+                            <p><%= detailProduct[0].thongTinSP %></p>
+                            <h2 class="mt-5" style="color: red">
+                                <%= cash %><small
+                                        class="text-decoration-line-through"
+                                        style="color: gray; font-size: 20px"><%= cashOld %></small>
+                            </h2>
+                            <h3 class="box-title mt-5">Thông tin:</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check text-success"> Số
+                                        lượng: </i> <%= detailProduct[0].soLuongNhap %></li>
+                                <li><i class="fa fa-check text-success"> Ngày
+                                        nhập: </i> <%= detailProduct[0].ngayNhap %>
+                                </li>
+                            </ul>
+                            <a href="/Product/update/<%= detailProduct[0].maSP %>">
+                                <button class="btn btn-primary btn-rounded">Sửa thông tin</button>
+                            </a>
+                            <a href="/Product/DeleteProduct/<%= detailProduct[0].maSP %>">
+                                <button class="btn btn-danger">Xóa sản phẩm</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--CONTENT-->
+
+    <!--FOOTER-->
+    <%- include FolderInclude/footer.ejs %>
+
+</div>
+</body>
+</html>
