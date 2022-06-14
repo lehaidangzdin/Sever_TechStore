@@ -564,18 +564,7 @@ router.post("/getSanPhamDaMuaAPI", function (req, res, next) {
             })
         } else {
             if (rows.length > 0) {
-                if (rows.length > 0) {
-                    return res.send({
-                        status: "susccess",
-                        message: "",
-                        data: rows
-                    })
-                } else {
-                    return res.send({
-                        status: "failure",
-                        message: ""
-                    })
-                }
+                return res.send(rows)
             } else {
                 return res.send({
                     status: "failure",
