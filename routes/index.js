@@ -568,7 +568,7 @@ router.post("/getSpTheoMaSPAPI", function (req, res, next) {
 })
 router.post("/getSpTheoTLAPI", function (req, res, next) {
     let maLoai = req.body.maLoai;
-    let sql = "SELECT* FROM SanPham WHERE maLoai =" + maLoai;
+    let sql = "SELECT* FROM SanPham WHERE maLoai ='" + maLoai + "' AND isDelete = 0";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
