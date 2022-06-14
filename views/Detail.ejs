@@ -83,15 +83,20 @@
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
-                            <h4 class="box-title mt-5"><%= detailProduct[0].tenSP %>
-                                %>
-                            </h4>
-                            <p><%= detailProduct[0].thongTinSP %></p>
+                            <div>
+                                <h4 class="box-title mt-5"><%= detailProduct[0].tenSP %>
+                                    %>
+                                </h4>
+                                <p style="color: gray; opacity: 0.8;font-size: 15px">Mã sản
+                                    phẩm: <%= detailProduct[0].maSP %></p>
+                            </div>
+
                             <h2 class="mt-5" style="color: red">
                                 <%= cash %><small
                                         class="text-decoration-line-through"
                                         style="color: gray; font-size: 20px"><%= cashOld %></small>
                             </h2>
+                            <p><%= detailProduct[0].thongTinSP %></p>
                             <h3 class="box-title mt-5">Thông tin:</h3>
                             <ul class="list-unstyled">
                                 <li><i class="fa fa-check text-success"> Số

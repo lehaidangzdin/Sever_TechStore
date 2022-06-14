@@ -235,22 +235,47 @@ router.post("/Home/FillProduct", function (req, res, next) {
 })
 // SEARCH PRODUCT
 router.post("/Home/Search", function (req, res, next) {
-    let maSP = req.body.maSP;
+    let searchNameSP = req.body.tenSP;
     // console.log(maLoai);
-    if (maSP != null) {
-        let sql = "SELECT * FROM SanPham WHERE maSP LIKE " + maSP + " AND isDelete = 0";
+    if (searchNameSP != null) {
+        // let sql = "SELECT * FROM SanPham WHERE tenSP LIKE '" + tenSP + "' AND isDelete = 0";
+        // con.query(sql, function (err, rows) {
+        //     if (err) {
+        //         throw  err;
+        //     } else {
+        //         if (rows.length > 0) {
+        //             res.render("Home", {
+        //                 title: "Home",
+        //                 data: rows,
+        //                 message: "Đã tìm thấy " + rows.length + " sản phẩm!"
+        //             });
+        //         } else {
+        //             res.render("Home", {title: "Home", data: [], message: "Không tìm thấy sản phẩm!"});
+        //         }
+        //     }
+        // })
+        let sql = "SELECT * FROM SanPham WHERE isDelete =0";
         con.query(sql, function (err, rows) {
             if (err) {
-                throw  err;
+                throw err;
             } else {
                 if (rows.length > 0) {
-                    res.render("Home", {
-                        title: "Home",
-                        data: rows,
-                        message: "Đã tìm thấy " + rows.length + " sản phẩm!"
+                    let newData = rows.filter(rows => {
+                        return rows.tenSP.toLowerCase().includes(searchNameSP.toLowerCase().toString());
                     });
-                } else {
-                    res.render("Home", {title: "Home", data: [], message: "Không tìm thấy sản phẩm!"});
+                    if (newData.length > 0) {
+                        res.render("Home", {
+                            title: "Home",
+                            data: newData,
+                            message: "Đã tìm thấy " + newData.length + " sản phẩm!"
+                        });
+                    } else {
+                        res.render("Home", {
+                            title: "Home",
+                            data: [],
+                            message: "Không tìm thấy sản phẩm!"
+                        });
+                    }
                 }
             }
         })
