@@ -453,7 +453,7 @@ router.post("/deleteSanPhamGHAPI", function (req, res, next) {
     }
 })
 router.get("/getAllSanPhamAPI", function (req, res, next) {
-    let sql = "SELECT* FROM SanPham";
+    let sql = "SELECT* FROM SanPham WHERE isDelete = 0";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
