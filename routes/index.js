@@ -552,7 +552,14 @@ router.post("/getSanPhamDaMuaAPI", function (req, res, next) {
                 message: err.message
             })
         } else {
-            return res.send(rows)
+            if (rows.length > 0) {
+                return res.send(rows)
+            } else {
+                return res.send({
+                    status: "failure",
+                    message: ""
+                })
+            }
         }
     })
 
