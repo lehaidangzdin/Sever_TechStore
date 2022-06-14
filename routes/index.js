@@ -423,7 +423,10 @@ router.post("/deleteGioHangAPI", function (req, res, next) {
                 // return res.json({
                 //     status: "susccess",
                 // })
-                return res.send("susccess");
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                });
             }
         })
     }
@@ -441,7 +444,10 @@ router.post("/deleteSanPhamGHAPI", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                return res.send("susccess")
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                })
             }
         })
     }
@@ -593,7 +599,10 @@ router.post("/InsertChiTietHoaDonAPI", function (req, res, next) {
                 message: err.message
             })
         } else {
-            return res.send("susccess")
+            return res.send({
+                status: "susccess",
+                message: ""
+            })
         }
     })
 
@@ -612,7 +621,10 @@ router.post("/InsertGioHangAPI", function (req, res, next) {
                 message: err.message
             })
         } else {
-            return res.send("susccess")
+            return res.send({
+                status: "susccess",
+                message: ""
+            })
         }
     })
 
@@ -625,7 +637,7 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
     let ngayBan = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
     let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `ngayBan`, `tongTien`) VALUES (NULL, '" + maKH + "','" + ngayBan + "','" + tongTien + "')";
-    con.query(sql, function (err, rows) {
+    con.query(sql, function (err) {
         if (err) {
             console.log(err.message);
             return res.send({
@@ -633,7 +645,10 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
                 message: err.message
             })
         } else {
-            return res.send("susccess")
+            return res.send({
+                status: "susccess",
+                message: ""
+            })
         }
     })
 
@@ -660,7 +675,10 @@ router.post("/loginAPI", function (req, res, next) {
                                 message: "Tài khoản của bạn đã bị khóa!"
                             })
                         } else {
-                            return res.send("susccess")
+                            return res.send({
+                                status: "susccess",
+                                message: ""
+                            })
                         }
                     } else {
                         return res.send({
@@ -706,7 +724,10 @@ router.post("/registerAPI", function (req, res, next) {
                                 message: err.message
                             })
                         } else {
-                            return res.send("susccess")
+                            return res.send({
+                                status: "susccess",
+                                message: ""
+                            })
                         }
                     })
                 }
@@ -751,7 +772,10 @@ router.post("/updateKhachHangAPI", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                return res.send("susccess");
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                });
             }
         })
     }
@@ -770,7 +794,10 @@ router.post("/updateMatKhauAPI", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                return res.send("susccess");
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                });
             }
         })
     }
@@ -789,7 +816,10 @@ router.post("/UpdateSanPhamAPI", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                return res.send("susccess");
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                });
             }
         })
     }
