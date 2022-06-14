@@ -499,6 +499,7 @@ router.post("/getGioHangAPI", function (req, res, next) {
             if (rows.length > 0) {
                 return res.send({
                     status: "susccess",
+                    message: "",
                     data: rows
                 })
             } else {
