@@ -383,7 +383,7 @@ router.get("/Order", function (req, res, next) {
 })
 
 //========================API MOBILE============================
-router.post("/deleteGioHang", function (req, res, next) {
+router.post("/deleteGioHangAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     if (maKH) {
         let sql = "DELETE FROM GioHang WHERE maKH = " + maKH;
@@ -403,7 +403,7 @@ router.post("/deleteGioHang", function (req, res, next) {
         })
     }
 })
-router.post("/deleteSanPhamGH", function (req, res, next) {
+router.post("/deleteSanPhamGHAPI", function (req, res, next) {
     let maSP = req.body.maSP;
     let maKH = req.body.maKH;
     if (maKH != null && maSP != null) {
@@ -421,7 +421,7 @@ router.post("/deleteSanPhamGH", function (req, res, next) {
         })
     }
 })
-router.get("/getAllSanPham", function (req, res, next) {
+router.get("/getAllSanPhamAPI", function (req, res, next) {
     let sql = "SELECT* FROM SanPham";
     con.query(sql, function (err, rows) {
         if (err) {
@@ -436,7 +436,7 @@ router.get("/getAllSanPham", function (req, res, next) {
     })
 
 })
-router.post("/getChiTietHoaDon", function (req, res, next) {
+router.post("/getChiTietHoaDonAPI", function (req, res, next) {
     let maHD = req.body.maHD;
     let sql = "SELECT ChiTietHoaDon.maHD,SanPham.maLoai, ChiTietHoaDon.maSP,SanPham.tenSP,SanPham.soLuongNhap, SanPham.hinhAnh, SanPham.giaTien, SanPham.giaCu,SanPham.ngayNhap, SanPham.thongTinSP, ChiTietHoaDon.soLuongMua,ChiTietHoaDon.donGia " +
         "FROM ChiTietHoaDon INNER JOIN SanPham ON ChiTietHoaDon.maSP = SanPham.maSP WHERE maHD = " + maHD;
@@ -453,7 +453,7 @@ router.post("/getChiTietHoaDon", function (req, res, next) {
     })
 
 })
-router.post("/getGioHang", function (req, res, next) {
+router.post("/getGioHangAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     let sql = "SELECT SanPham.maLoai, GioHang.maSP,GioHang.maKH,SanPham.tenSP,SanPham.soLuongNhap, SanPham.hinhAnh, SanPham.giaTien, SanPham.giaCu,SanPham.ngayNhap, SanPham.thongTinSP, SUM(soLuongMua)AS soLuong " +
         "FROM GioHang INNER JOIN SanPham ON GioHang.maSP = SanPham.maSP WHERE maKH = " + maKH + " GROUP BY maSP";
@@ -470,7 +470,7 @@ router.post("/getGioHang", function (req, res, next) {
     })
 
 })
-router.post("/getHoaDon", function (req, res, next) {
+router.post("/getHoaDonAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     let sql = "SELECT * FROM `HoaDon` WHERE maKH = " + maKH;
     con.query(sql, function (err, rows) {
@@ -486,12 +486,12 @@ router.post("/getHoaDon", function (req, res, next) {
     })
 
 })
-router.post("/getKhachHang", function (req, res, next) {
+router.post("/getKhachHangAPI", function (req, res, next) {
     let tenDangNhap = req.body.tenDangNhap;
-    let sql = "SELECT* FROM KhachHang WHERE tenDangNhap = " + tenDangNhap;
+    let sql = "SELECT* FROM KhachHang WHERE tenDangNhap = '" + tenDangNhap + "'";
     con.query(sql, function (err, rows) {
         if (err) {
-            console.log(err.message);
+            // console.log(err.message);
             return res.send({
                 status: "failure",
                 message: err.message
@@ -502,7 +502,7 @@ router.post("/getKhachHang", function (req, res, next) {
     })
 
 })
-router.post("/getSanPhamDaMua", function (req, res, next) {
+router.post("/getSanPhamDaMuaAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     let sql = "SELECT SanPham.maLoai, SanPham.maSP, SanPham.tenSP,SanPham.tenSP, SanPham.soLuongNhap,SanPham.hinhAnh, SanPham.giaTien,SanPham.giaCu, SanPham.ngayNhap,SanPham.thongTinSP " +
         "FROM SanPham JOIN ChiTietHoaDon ON SanPham.maSP = ChiTietHoaDon.maSP JOIN HoaDon ON ChiTietHoaDon.maHD = HoaDon.maHD JOIN KhachHang ON HoaDon.maKH = KhachHang.maKH WHERE KhachHang.maKH = " + maKH + " GROUP BY ChiTietHoaDon.maSP";
@@ -519,7 +519,7 @@ router.post("/getSanPhamDaMua", function (req, res, next) {
     })
 
 })
-router.post("/getSpTheoMaSP", function (req, res, next) {
+router.post("/getSpTheoMaSPAPI", function (req, res, next) {
     let maSP = req.body.maSP;
     let sql = "SELECT * FROM `SanPham` WHERE maSP =" + maSP;
     con.query(sql, function (err, rows) {
@@ -535,7 +535,7 @@ router.post("/getSpTheoMaSP", function (req, res, next) {
     })
 
 })
-router.post("/getSpTheoTL", function (req, res, next) {
+router.post("/getSpTheoTLAPI", function (req, res, next) {
     let maLoai = req.body.maLoai;
     let sql = "SELECT* FROM SanPham WHERE maLoai =" + maLoai;
     con.query(sql, function (err, rows) {
@@ -551,7 +551,7 @@ router.post("/getSpTheoTL", function (req, res, next) {
     })
 
 })
-router.post("/InsertChiTietHoaDon", function (req, res, next) {
+router.post("/InsertChiTietHoaDonAPI", function (req, res, next) {
     let maHD = req.body.maHD;
     let maSP = req.body.maSP;
     let soLuongMua = req.body.soLuongMua;
@@ -573,7 +573,7 @@ router.post("/InsertChiTietHoaDon", function (req, res, next) {
     })
 
 })
-router.post("/InsertGioHang", function (req, res, next) {
+router.post("/InsertGioHangAPI", function (req, res, next) {
     let maSP = req.body.maSP;
     let maKH = req.body.maKH;
     let soLuongMua = req.body.soLuongMua;
@@ -592,12 +592,14 @@ router.post("/InsertGioHang", function (req, res, next) {
     })
 
 })
-router.post("/InsertHoaDon", function (req, res, next) {
+router.post("/InsertHoaDonAPI", function (req, res, next) {
 
     let maKH = req.body.maKH;
     let tongTien = req.body.tongTien;
+    let d = new Date();
+    let ngayBan = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
-    let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `tongTien`) VALUES (NULL, '" + maKH + "','" + tongTien + "')";
+    let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `ngayBan`, `tongTien`) VALUES (NULL, '" + maKH + "','" + ngayBan + "','" + tongTien + "')";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
@@ -611,11 +613,12 @@ router.post("/InsertHoaDon", function (req, res, next) {
     })
 
 })
-router.post("/login", function (req, res, next) {
+router.post("/loginAPI", function (req, res, next) {
     let tenDangNhap = req.body.tenDangNhap;
     let matKhau = req.body.matKhau;
+    console.log(tenDangNhap, matKhau)
     if (tenDangNhap != null && matKhau != null) {
-        let sql = "SELECT * FROM KhachHang WHERE tenDangNhap = '" + tenDangNhap + "' AND matKhau = '" + matKhau + "'";
+        let sql = "SELECT * FROM KhachHang WHERE tenDangNhap = '" + tenDangNhap + "'";
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
@@ -624,8 +627,8 @@ router.post("/login", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                if (rows != null) {
-                    if (matKhau == row[0].matKhau) {
+                if (rows.length > 0) {
+                    if (rows[0].matKhau == matKhau) {
                         if (rows[0].isDelete == 1) {
                             return res.send({
                                 status: "failure",
@@ -634,6 +637,11 @@ router.post("/login", function (req, res, next) {
                         } else {
                             return res.send("susccess")
                         }
+                    } else {
+                        return res.send({
+                            status: "failure",
+                            message: "Sai tài khoản hoặc mật khẩu!"
+                        })
                     }
                 }
             }
@@ -641,7 +649,7 @@ router.post("/login", function (req, res, next) {
     }
 
 })
-router.post("/register", function (req, res, next) {
+router.post("/registerAPI", function (req, res, next) {
     let tenDangNhap = req.body.tenDangNhap;
     let matKhau = req.body.matKhau;
     let tenKH = req.body.tenKH;
@@ -658,16 +666,16 @@ router.post("/register", function (req, res, next) {
                     message: err.message
                 })
             } else {
-                if (rows != null) {
+                if (rows.length > 0) {
                     return res.send({
                         status: "failure",
                         message: "Tên đăng nhập đã tồn tại!"
                     })
                 } else {
-                    let sql1 = "insert into KhachHang values(null,'" + tenDangNhap + "', '" + matKhau + "','" + tenKH + "','" + namSinh + "','" + soDienThoai + "','" + diaChi + "')";
+                    let sql1 = "insert into KhachHang values(NULL,'" + tenDangNhap + "', '" + matKhau + "','" + tenKH + "','" + namSinh + "','" + soDienThoai + "','" + diaChi + "','0')";
                     con.query(sql1, function (err) {
                         if (err) {
-                            console.log(err.message);
+                            console.log("err: " + err.message);
                             return res.send({
                                 status: "failure",
                                 message: err.message
@@ -679,10 +687,15 @@ router.post("/register", function (req, res, next) {
                 }
             }
         })
+    } else {
+        return res.send({
+            status: "failure",
+            message: "Không để trống các trường!"
+        })
     }
 
 })
-router.get("/SPMoiNhat", function (req, res, next) {
+router.get("/SPMoiNhatAPI", function (req, res, next) {
     let sql = "SELECT * FROM SanPham ORDER BY ngayNhap DESC LIMIT 20";
     con.query(sql, function (err, rows) {
         if (err) {
@@ -697,7 +710,7 @@ router.get("/SPMoiNhat", function (req, res, next) {
     })
 
 })
-router.post("/updateKhachHang", function (req, res, next) {
+router.post("/updateKhachHangAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     let tenKH = req.body.tenKH;
     let namSinh = req.body.namSinh;
@@ -719,7 +732,7 @@ router.post("/updateKhachHang", function (req, res, next) {
     }
 
 })
-router.post("/updateMatKhau", function (req, res, next) {
+router.post("/updateMatKhauAPI", function (req, res, next) {
     let maKH = req.body.maKH;
     let matKhau = req.body.matKhau;
     if (maKH != null && matKhau != null) {
@@ -738,7 +751,7 @@ router.post("/updateMatKhau", function (req, res, next) {
     }
 
 })
-router.post("/UpdateSanPham", function (req, res, next) {
+router.post("/UpdateSanPhamAPI", function (req, res, next) {
     let maSP = req.body.maSP;
     let soLuongNhap = req.body.soLuongNhap;
     if (maSP != null && soLuongNhap != null) {
