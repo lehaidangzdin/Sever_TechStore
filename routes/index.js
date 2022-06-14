@@ -662,7 +662,7 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
     let ngayBan = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
     let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `ngayBan`, `tongTien`) VALUES (NULL, '" + maKH + "','" + ngayBan + "','" + tongTien + "')";
-    con.query(sql, function (err) {
+    con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
             return res.send({
@@ -670,8 +670,10 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
                 message: err.message
             })
         } else {
+            let lastID = rows.insertId;
             return res.send({
                 status: "susccess",
+                id: lastID,
                 message: ""
             })
         }
