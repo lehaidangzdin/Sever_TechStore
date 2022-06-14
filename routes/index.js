@@ -683,9 +683,14 @@ router.post("/loginAPI", function (req, res, next) {
                     } else {
                         return res.send({
                             status: "failure",
-                            message: "Sai tài khoản hoặc mật khẩu!"
+                            message: "Sai mật khẩu!"
                         })
                     }
+                } else {
+                    return res.send({
+                        status: "failure",
+                        message: "Tên đăng nhập không tồn tại!"
+                    })
                 }
             }
         })
