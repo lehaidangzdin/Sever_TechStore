@@ -782,7 +782,7 @@ router.post("/registerAPI", function (req, res, next) {
 
 })
 router.get("/SPMoiNhatAPI", function (req, res, next) {
-    let sql = "SELECT * FROM SanPham ORDER BY ngayNhap DESC LIMIT 20";
+    let sql = "SELECT * FROM SanPham ORDER BY ngayNhap DESC LIMIT 20 WHERE isDelete = 0";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
