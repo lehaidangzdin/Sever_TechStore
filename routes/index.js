@@ -744,45 +744,52 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
 router.post("/loginAPI", function (req, res, next) {
     let tenDangNhap = req.body.tenDangNhap;
     let matKhau = req.body.matKhau;
-    console.log(tenDangNhap, matKhau)
-    if (tenDangNhap != null && matKhau != null) {
-        let sql = "SELECT * FROM KhachHang WHERE tenDangNhap = '" + tenDangNhap + "'";
-        con.query(sql, function (err, rows) {
-            if (err) {
-                console.log(err.message);
-                return res.send({
-                    status: "failure",
-                    message: err.message
-                })
-            } else {
-                if (rows.length > 0) {
-                    if (rows[0].matKhau == matKhau) {
-                        if (rows[0].isDelete == 1) {
-                            return res.send({
-                                status: "failure",
-                                message: "Tài khoản của bạn đã bị khóa!"
-                            })
+if (tenDangNhap != null && matKhau != null) {
+        if (tenDangNhap != "admin") {
+            let sql = "SELECT * FROM KhachHang WHERE tenDangNhap = '" + tenDangNhap + "'";
+            con.query(sql, function (err, rows) {
+                if (err) {
+                    console.log(err.message);
+                    return res.send({
+                        status: "failure",
+                        message: err.message
+                    })
+                } else {
+                    if (rows.length > 0) {
+                        if (rows[0].matKhau == matKhau) {
+                            if (rows[0].isDelete == 1) {
+                                return res.send({
+                                    status: "failure",
+                                    message: "Tài khoản của bạn đã bị khóa!"
+                                })
+                            } else {
+                                return res.send({
+                                    status: "susccess",
+                                    message: ""
+                                })
+                            }
                         } else {
                             return res.send({
-                                status: "susccess",
-                                message: ""
+                                status: "failure",
+                                message: "Sai mật khẩu!"
                             })
                         }
                     } else {
                         return res.send({
                             status: "failure",
-                            message: "Sai mật khẩu!"
+                            message: "Tên đăng nhập không tồn tại!"
                         })
                     }
-                } else {
-                    return res.send({
-                        status: "failure",
-                        message: "Tên đăng nhập không tồn tại!"
-                    })
                 }
-            }
-        })
+            })
+        } else {
+            return res.send({
+                status: "failure",
+                message: "Tên đăng nhập không tồn tại!"
+            })
+        }
     }
+    
 
 })
 router.post("/registerAPI", function (req, res, next) {
