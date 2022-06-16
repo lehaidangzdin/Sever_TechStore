@@ -514,10 +514,10 @@ router.post("/getGioHangAPI", function (req, res, next) {
 })
 router.post("/getHoaDonAPI", function (req, res, next) {
     let maKH = req.body.maKH;
-    let sql = "SELECT * FROM `HoaDon` WHERE maKH = " + maKH;
+    let sql = "SELECT * FROM `HoaDon` WHERE maKH = '" + maKH + "'";
     con.query(sql, function (err, rows) {
         if (err) {
-            console.log(err.message);
+            // console.log(err.message);
             return res.send({
                 status: "failure",
                 message: err.message
@@ -532,7 +532,7 @@ router.post("/getHoaDonAPI", function (req, res, next) {
             } else {
                 return res.send({
                     status: "failure",
-                    message: ""
+                    message: "Mã khách hàng k chính xác!"
                 })
             }
         }
