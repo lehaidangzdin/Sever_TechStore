@@ -669,7 +669,7 @@ router.post("/InsertHoaDonAPI", function (req, res, next) {
     let d = new Date();
     let ngayBan = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 
-    let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `ngayBan`, `tongTien`) VALUES (NULL, '" + maKH + "','" + ngayBan + "','" + tongTien + "')";
+    let sql = "INSERT INTO `HoaDon` (`maHD`, `maKH`, `ngayBan`, `tongTien`,`isPay`) VALUES (NULL, '" + maKH + "','" + ngayBan + "','" + tongTien + "',1)";
     con.query(sql, function (err, rows) {
         if (err) {
             console.log(err.message);
@@ -848,6 +848,28 @@ router.post("/UpdateSanPhamAPI", function (req, res, next) {
     let soLuongNhap = req.body.soLuongNhap;
     if (maSP != null && soLuongNhap != null) {
         let sql = "UPDATE SanPham SET soLuongNhap = '" + soLuongNhap + "' WHERE maSP = '" + maSP + "'";
+        con.query(sql, function (err, rows) {
+            if (err) {
+                console.log(err.message);
+                return res.send({
+                    status: "failure",
+                    message: err.message
+                })
+            } else {
+                return res.send({
+                    status: "susccess",
+                    message: ""
+                });
+            }
+        })
+    }
+
+})
+router.post("/xacNhanDonHang", function (req, res, next) {
+    let isPay = req.body.isPay;
+    let maHD = req.body.maHD;
+    if (isPay && maHD) {
+        let sql = "UPDATE HoaDon SET isPay = '" + isPay + "' WHERE maHD = '" + maHD + "'";
         con.query(sql, function (err, rows) {
             if (err) {
                 console.log(err.message);
