@@ -406,6 +406,59 @@ router.get("/Order", function (req, res, next) {
         }
     });
 })
+// CHANGE PASS
+router.get('/ChangePass', function (req, res, next) {
+    try {
+        let token = req.cookies;
+        // console.log(token);
+        let ketqua = jwt.verify(token.token, "mk");
+        if (ketqua) {
+            next();
+        }
+    } catch (e) {
+        // res.json("ban can dang nhap");
+        res.redirect('/');
+    }
+}, function (req, res, next) {
+    res.render('ChangePassAdmin', {title: "Đổi mật khẩu"});
+})
+router.post("/ChangePass", function (req, res, next) {
+    let mkCu = req.body.matKhauCu;
+    let mkMoi = req.body.matKhauMoi;
+
+    if (mkMoi && mkCu) {
+        let sql = "SELECT * FROM KhachHang WHERE tenDangNhap = 'admin'";
+        con.query(sql, function (err, row) {
+            if (err) {
+                throw err;
+            } else {
+                if (row) {
+                    if (mkCu === (row[0].matKhau)) {
+                        let sql = "UPDATE KhachHang SET matKhau = '" + mkMoi + "' WHERE tenDangNhap = 'admin'";
+                        con.query(sql, function (err) {
+                            if (err) {
+                                throw err;
+                            } else {
+                                return res.send({
+                                    status: "succsess",
+                                    message: "Đổi mật khẩu thành công!"
+                                })
+                            }
+                        })
+                    } else {
+                        return res.send({
+                            status: "failure",
+                            message: "Mật khẩu cũ không chính xác!"
+                        })
+                    }
+                }
+            }
+        })
+
+    }
+})
+//
+
 
 //========================API MOBILE============================
 router.post("/deleteGioHangAPI", function (req, res, next) {
