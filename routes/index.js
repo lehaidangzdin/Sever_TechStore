@@ -9,9 +9,9 @@ router.use(cookieParser())
 router.use('/static', express.static('../public/stylesheets/style.css'))
 const con = mysql.createConnection({
     host: "sql6.freesqldatabase.com",
-    user: "sql6501908",
-    password: "VinVA1b1b2",
-    database: "sql6501908",
+    user: "sql6503347",
+    password: "wjMXZ19Pyf",
+    database: "sql6503347",
 });
 con.connect(function (err) {
     if (err) {
